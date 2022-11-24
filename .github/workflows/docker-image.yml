@@ -1,0 +1,26 @@
+on:
+  push:
+    tags:
+      - v**
+      - release-v**
+  workflow_dispatch:
+
+env:
+  IMAGE_NAME: ${{ github.event.repository.name }}
+  IMAGE_VERSION: ${{ github.sha }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: benjlevesque/short-sha@v1.2
+      id: short-sha
+      with:
+        length: 7
+    - uses: zenato/docker-action@master
+      with:
+        username: ${{ secrets.HUB_NAME }}
+        password: ${{ secrets.HUB_PWD }}
+        repository: ${{ secrets.HUB_NAME }}/${{ env.IMAGE_NAME }}
+        tag: ${{ steps.short-sha.outputs.sha }}

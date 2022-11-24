@@ -1,0 +1,9 @@
+build:
+  # Official docker image.
+  image: docker:stable
+  stage: build
+  before_script:
+    - docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD" $DOCKER_REGISTRY
+  script:
+    - docker build --no-cache --pull -t "$DOCKER_REGISTRY/$DOCKER_REGISTRY_NAMESPACE/$CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA" .
+    - docker push "$DOCKER_REGISTRY/$DOCKER_REGISTRY_NAMESPACE/$CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA"
