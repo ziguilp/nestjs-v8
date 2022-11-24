@@ -1,3 +1,13 @@
+/*
+ * @Author        : turbo 664120459@qq.com
+ * @Date          : 2022-11-24 10:44:10
+ * @LastEditors   : turbo 664120459@qq.com
+ * @LastEditTime  : 2022-11-24 14:25:25
+ * @FilePath      : /nestjs-v8/src/payment/entity/refundRecord.entity.ts
+ * @Description   : 
+ * 
+ * Copyright (c) 2022 by turbo 664120459@qq.com, All Rights Reserved. 
+ */
 import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, Index, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { RefundRecordStatusDto } from "../dto/refund.dto";
 

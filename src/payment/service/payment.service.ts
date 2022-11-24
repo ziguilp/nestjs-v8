@@ -1,3 +1,13 @@
+/*
+ * @Author        : turbo 664120459@qq.com
+ * @Date          : 2022-11-24 10:44:10
+ * @LastEditors   : turbo 664120459@qq.com
+ * @LastEditTime  : 2022-11-24 14:52:40
+ * @FilePath      : /nestjs-v8/src/payment/service/payment.service.ts
+ * @Description   : 
+ * 
+ * Copyright (c) 2022 by turbo 664120459@qq.com, All Rights Reserved. 
+ */
 import { forwardRef, Inject, Injectable, Logger, NotFoundException, ServiceUnavailableException } from "@nestjs/common";
 import { REQUEST } from "@nestjs/core";
 import { Request } from "express";
@@ -17,6 +27,9 @@ import * as moment from "moment";
 import { WechatNotifyDecrytedData } from "../dto/wechat.dto";
 import { PaymentLib } from "../lib/payment.lib";
 
+/**
+ * @description: 支付服务实现
+ */
 @Injectable()
 export class PaymentService {
 

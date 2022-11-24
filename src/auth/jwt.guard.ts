@@ -2,7 +2,7 @@
  * @Author        : turbo 664120459@qq.com
  * @Date          : 2022-11-24 10:44:10
  * @LastEditors   : turbo 664120459@qq.com
- * @LastEditTime  : 2022-11-24 12:34:50
+ * @LastEditTime  : 2022-11-24 14:34:40
  * @FilePath      : /nestjs-v8/src/auth/jwt.guard.ts
  * @Description   : 
  * 
@@ -21,7 +21,7 @@ import { Cache } from 'cache-manager';
 import { LogQueueService } from 'src/queue/producer/log.queue';
 import { Request } from 'express';
 import { CustomMetaName_Rights } from 'src/common/decorator/rights';
-import { CaptchaVerifyBodyDto, CaptchaVerifyDto, CaptchaVerifyEventType } from 'src/common/dto/base.dto';
+import { CaptchaVerifyDto, CaptchaVerifyEventType } from 'src/common/dto/base.dto';
 import { CustomMetaName_Captcha } from 'src/common/decorator/api-captcha';
 import { NotifyService } from 'src/common/service/notify.service';
 import { hasKey } from 'src/utils/util';

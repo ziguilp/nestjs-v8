@@ -4,10 +4,13 @@
  * @LastEditors: turbo 664120459@qq.com
  * @LastEditTime: 2022-11-24 12:21:33
  * @FilePath: /nestjs-v8/src/main.ts
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @Description: 入口文件
+ */
+
+/**
+ * @description: 这里是加载env环境配置的，不要改动
  */
 import * as dotenv from 'dotenv';
-
 dotenv.config()
 
 import './utils/number';
@@ -24,7 +27,9 @@ import { ResponseInterceptor } from './common/interceptor/response.interceptor';
 import { Request } from 'express';
 import { WinstonLogger, WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 
-
+/**
+ * @description: 重新申明
+ */
 declare global {
     namespace Express {
         interface User extends UserInfoDto { }
@@ -36,6 +41,9 @@ declare global {
     }
 }
 
+/**
+ * @description: 主程序启动
+ */
 async function bootstrap() {
     const namespace = createNamespace(appConfig.appNameSpace)
 
