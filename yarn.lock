@@ -7273,6 +7273,11 @@ tunnel-agent@^0.6.0:
   dependencies:
     safe-buffer "^5.0.1"
 
+turbo-number@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmmirror.com/turbo-number/-/turbo-number-1.0.1.tgz#d514a2aef51a61c0a596cedcaac97b5c9bc3c45f"
+  integrity sha512-hf70S0glAWcC4FAldp5WoLhruptcvrddLHTT6QYujGFbK36aHWkEv2JHVp6zGQPj39axJhmWYZaXuAlmSWSQ0g==
+
 tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "https://registry.npmmirror.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
