@@ -2,7 +2,7 @@
  * @Author        : turbo 664120459@qq.com
  * @Date          : 2022-11-24 10:44:10
  * @LastEditors   : turbo 664120459@qq.com
- * @LastEditTime  : 2022-11-24 14:18:25
+ * @LastEditTime  : 2023-01-08 11:33:48
  * @FilePath      : /nestjs-v8/src/config.ts
  * @Description   : 
  * 
@@ -14,6 +14,14 @@ import { readFileSync } from "fs"
 import { join } from "path"
 
 
+let appPerfixPath = process.env.APP_PRIFIX_PATH || '';
+if (appPerfixPath.startsWith("/")) {
+    appPerfixPath = appPerfixPath.slice(1)
+}
+
+if (appPerfixPath.endsWith("/")) {
+    appPerfixPath = appPerfixPath.slice(0, -1)
+}
 /**
  * @description: app基本配置
  * @return {*}
@@ -21,6 +29,7 @@ import { join } from "path"
 export const appConfig = {
     port: process.env.PORT || 3000,
     host: process.env.HOST || `http://localhost:${process.env.PORT || 3000}`,
+    appGlobalPrefix: appPerfixPath,
     appNameSpace: process.env.PROJECT_NAME || 'my-nest-app',
 }
 
@@ -41,7 +50,7 @@ export const cacheConfig = {
     port: process.env.REDIS_PORT || 6379,
     host: process.env.REDIS_HOST || '127.0.0.1',
     password: process.env.REDIS_PWD || undefined,
-    db: 1
+    db: 'undefined' !== typeof process.env.REDIS_CACHE_DB && /^\d+$/.test(process.env.REDIS_CACHE_DB) ? Number(process.env.REDIS_CACHE_DB) : 1
 } as CacheModuleOptions
 
 export const queueConfig = {
@@ -50,7 +59,7 @@ export const queueConfig = {
     port: process.env.REDIS_PORT || 6379,
     host: process.env.REDIS_HOST || '127.0.0.1',
     password: process.env.REDIS_PWD || undefined,
-    db: 2
+    db: 'undefined' !== typeof process.env.REDIS_QUEUE_DB && /^\d+$/.test(process.env.REDIS_QUEUE_DB) ? Number(process.env.REDIS_QUEUE_DB) : 2
 }
 
 /**
@@ -60,42 +69,44 @@ export const wechatPayConfig = {
     /**
      * 商户号
      */
-    mchId: '1628577543',
+    mchId: process.env.WECHAT_PAY_MCHID,
 
     /**
      * APIV2 API密钥
      */
-    apiv2Secret: 'e8838a30932bdafcbe88a1295face287',
+    apiv2Secret: process.env.WECHAT_PAY_APIV2_SECRET,
 
     /**
      * APiV3密钥
      */
-    apiv3Secret: '4250ac12e3c589b36ab652790690e6be',
+    apiv3Secret: process.env.WECHAT_PAY_APIV3_SECRET,
 
     /**
      * 商户证书序列号
      */
-    merchantCertificateSerial: '72793711DEB72A93670264D4CA11B2EFC74BA8D9',
+    merchantCertificateSerial: process.env.WECHAT_PAY_MERCHANT_CERT_SERIAL,
 
     /**
      * 私钥证书
      */
-    merchantPrivateKey: readFileSync(join(__dirname, './payment/cert/wechat/apiclient_key.pem')),
+    merchantPrivateKey: process.env.WECHAT_PAY_MERCHANT_PRIVATE_KEY_PATH ? readFileSync(join(__dirname, process.env.WECHAT_PAY_MERCHANT_PRIVATE_KEY_PATH)) : process.env.WECHAT_PAY_MERCHANT_PRIVATE_KEY_VAL,
+
 
     /**
      * 平台证书
      */
-    platformCertificate: readFileSync(join(__dirname, './payment/cert/wechat/wechatpay_1124B6D4EBAEAB430A4030FB3D5364D2370F5DE3.pem')),
+    platformCertificate: process.env.WECHAT_PAY_PLATFORM_CERT_PATH ? readFileSync(join(__dirname, process.env.WECHAT_PAY_PLATFORM_CERT_PATH)) : process.env.WECHAT_PAY_PLATFORM_CERT_VAL,
+
 
     /**
      * 平台证书序列号
      */
-    platformCertificateSerial: '',
+    platformCertificateSerial: process.env.WECHAT_PAY_PLATFORM_CERT_SERIAL,
 
     /**
      * 通知地址
      */
-    notiyUri: appConfig.host + '/payment/notify/wechat'
+    notiyUri: process.env.WECHAT_PAY_NOTIFY_URL || `${appConfig.host}${appConfig.appGlobalPrefix ? `/${appConfig.appGlobalPrefix}` : ''}/payment/notify/wechat`
 }
 
 /**
@@ -160,10 +171,10 @@ export const WechatLogisticServiceType = {
  * 短信发送
  */
 export const LkSMSConfig = {
-    userId: '',
-    appId: '',
-    password: ``,
-    sign: 'NestV8'
+    userId: process.env.LKSMS_USER_ID,
+    appId: process.env.LKSMS_APPID,
+    password: process.env.LKSMS_PASSWORD,
+    sign: process.env.SIGN
 }
 
 /**

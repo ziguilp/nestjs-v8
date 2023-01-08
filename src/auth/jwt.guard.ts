@@ -2,7 +2,7 @@
  * @Author        : turbo 664120459@qq.com
  * @Date          : 2022-11-24 10:44:10
  * @LastEditors   : turbo 664120459@qq.com
- * @LastEditTime  : 2022-11-24 14:34:40
+ * @LastEditTime  : 2023-01-08 10:09:57
  * @FilePath      : /nestjs-v8/src/auth/jwt.guard.ts
  * @Description   : 
  * 
@@ -78,8 +78,8 @@ export class JwtGuard implements CanActivate {
 
                 let verify = false
 
-                if (verifyEvent === CaptchaVerifyEventType.TEST) {
-                    verify = verifyCaptcha === '1234'
+                if (verifyEvent === CaptchaVerifyEventType.TEST || process.env.CAPCHA_VERIFY_TEST) {
+                    verify = verifyCaptcha === String(process.env.CAPCHA_VERIFY_TEST || '1234')
                 } else {
                     verify = await this.notifyService.captchaVerify({
                         event: verifyEvent,

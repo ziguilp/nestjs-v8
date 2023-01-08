@@ -1,10 +1,12 @@
 /*
- * @Author: turbo 664120459@qq.com
- * @Date: 2022-11-24 10:44:10
- * @LastEditors: turbo 664120459@qq.com
- * @LastEditTime: 2022-11-24 10:50:44
- * @FilePath: /nestjs-v8/src/app.module.ts
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @Author        : turbo 664120459@qq.com
+ * @Date          : 2022-11-24 10:44:10
+ * @LastEditors   : turbo 664120459@qq.com
+ * @LastEditTime  : 2023-01-08 11:14:42
+ * @FilePath      : /nestjs-v8/src/app.module.ts
+ * @Description   : 
+ * 
+ * Copyright (c) 2023 by turbo 664120459@qq.com, All Rights Reserved. 
  */
 import { CacheModule, Module } from '@nestjs/common';
 import { APP_GUARD, APP_INTERCEPTOR, DiscoveryService, MetadataScanner } from '@nestjs/core';
@@ -17,7 +19,7 @@ import { JwtGuard } from './auth/jwt.guard';
 import { CommonModule } from './common/common.module';
 import * as redisStore from 'cache-manager-redis-store';
 import { cacheConfig } from './config';
-import { RequestLockInterceptor } from './common/interceptor/RequestLock.interceptor';
+import { RequestLockInterceptor } from './common/interceptor/requestlock.interceptor';
 import { LogisticModule } from './logistic/logistic.module';
 import { OrderModule } from './order/order.module';
 import { PaymentModule } from './payment/payment.module';

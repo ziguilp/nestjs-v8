@@ -1,3 +1,13 @@
+/*
+ * @Author        : turbo 664120459@qq.com
+ * @Date          : 2022-11-24 10:44:10
+ * @LastEditors   : turbo 664120459@qq.com
+ * @LastEditTime  : 2023-01-08 11:16:33
+ * @FilePath      : /nestjs-v8/src/app.controller.ts
+ * @Description   : 
+ * 
+ * Copyright (c) 2023 by turbo 664120459@qq.com, All Rights Reserved. 
+ */
 import { Controller, Get, Query, Req, ServiceUnavailableException } from '@nestjs/common';
 import { ApiBearerAuth, ApiHeader, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { Request } from 'express';
@@ -35,7 +45,12 @@ export class AppController {
     @Get('/headers')
     async headers(@Req() req: Request) {
         return {
-            headers: req.headers
+            headers: req.headers,
+            params: req.params,
+            body: req.body,
+            query: req.query,
+            cookies: req.cookies || {},
+            ip: req.clientIp
         }
     }
 

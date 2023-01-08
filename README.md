@@ -1,10 +1,12 @@
 <!--
- * @Author: turbo 664120459@qq.com
- * @Date: 2022-11-24 10:44:10
- * @LastEditors: turbo 664120459@qq.com
- * @LastEditTime: 2022-11-24 12:04:42
- * @FilePath: /nestjs-v8/README.md
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @Author        : turbo 664120459@qq.com
+ * @Date          : 2022-11-24 10:44:10
+ * @LastEditors   : turbo 664120459@qq.com
+ * @LastEditTime  : 2023-01-08 11:22:01
+ * @FilePath      : /nestjs-v8/README.md
+ * @Description   : 
+ * 
+ * Copyright (c) 2023 by turbo 664120459@qq.com, All Rights Reserved. 
 -->
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
@@ -24,7 +26,7 @@
 
 ## 中文文档
 
-[nestjs中文文档](https://docs.nestjs.cn/8/introduction)
+[nestjs中文文档地址](https://docs.nestjs.cn/8/introduction)
 
 
 ## Installation
@@ -66,8 +68,13 @@ $ npm run test:cov 或者 yarn test:cov
 - 请求权限验证
 - 内置了定时任务/队列的样例
 - 内置了基于凌凯的短信通道、极光推送、微信消息发送、邮件发送
-- 内置支持了aliOss 和 七牛云存储 的token获取支持，可以提供token给客户端进行直传
+- 内置支持了aliOss 和 七牛云存储 的token获取，可以提供token给客户端进行直传
 - 内置了AWS的cloudWatch的实现，检测到配置后，日志将上传至cloudWatch 
+- 内置了验证码验证功能（支持短信验证码和邮件验证码）
+
+## 注意事项
+- 返回给接口数据时，undefined的key会被response丢弃，返回数据时应当注意
+- 内置的RequestLock，不应当作为事务锁使用
 
 ## 基于nestjs 对控制器方法做了一些处理
 ```JavaScript

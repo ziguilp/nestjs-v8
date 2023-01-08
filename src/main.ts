@@ -1,10 +1,12 @@
 /*
- * @Author: turbo 664120459@qq.com
- * @Date: 2022-11-24 10:44:10
- * @LastEditors: turbo 664120459@qq.com
- * @LastEditTime: 2022-11-24 12:21:33
- * @FilePath: /nestjs-v8/src/main.ts
- * @Description: 入口文件
+ * @Author        : turbo 664120459@qq.com
+ * @Date          : 2022-11-24 10:44:10
+ * @LastEditors   : turbo 664120459@qq.com
+ * @LastEditTime  : 2023-01-08 10:46:50
+ * @FilePath      : /nestjs-v8/src/main.ts
+ * @Description   : 
+ * 
+ * Copyright (c) 2023 by turbo 664120459@qq.com, All Rights Reserved. 
  */
 
 /**
@@ -76,18 +78,26 @@ async function bootstrap() {
     })
 
 
+
+
     const options = new DocumentBuilder()
         .setTitle(`${process.env.SYS_NAME || ''}接口文档`)
-        .setDescription('XXXXXXXXXXX')
+        .setBasePath(appConfig.appGlobalPrefix)
+        .setDescription(process.env.APP_DESCRIPTION)
         .setVersion('1.0')
         .addBearerAuth()
         .build();
+
     app.useGlobalInterceptors(new ResponseInterceptor());
+
+    app.setGlobalPrefix(appConfig.appGlobalPrefix)
+
     const document = SwaggerModule.createDocument(app, options);
-    SwaggerModule.setup('api-doc', app, document);
+
+    SwaggerModule.setup(`${appConfig.appGlobalPrefix}/api-doc`, app, document);
 
     await app.listen(appConfig.port);
 
-    logger.log(`服务已启动: 接口文档地址-${appConfig.host}/api-doc`);
+    logger.log(`服务已启动: 接口文档地址-${appConfig.host}${appConfig.appGlobalPrefix ? `/${appConfig.appGlobalPrefix}` : ''}/api-doc`);
 }
 bootstrap();
