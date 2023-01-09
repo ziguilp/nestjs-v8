@@ -6,7 +6,7 @@ import { isMobile } from 'src/utils/util';
 import { CACHE_KEY } from 'src/constants';
 import { Cache } from 'cache-manager';
 import { CaptchaSendDto, CaptchaVerifyDto, CaptchaVerifyEventType, NotifyDto, NotifyPipe, WechatMiniappMsgDto, WechatMiniappSubscribeMsgDto, WechatMpMsgDto } from '../dto/base.dto';
-import { LkSmsLibrary } from '../library/lksms';
+import { LkSms } from 'turbo-lksms';
 import { NotifyQueueService } from 'src/queue/producer/nofity.queue';
 import { ThirdPlatformDto } from 'src/auth/third/third.dto';
 import { WechatLib } from 'src/auth/third/wechat.lib';
@@ -14,6 +14,7 @@ import { UserUtil } from 'src/auth/utils/userUtil';
 import axios from 'axios';
 import { User } from '../entity/user.entity';
 import { SystemMsg } from '../entity/systemMsg.entity';
+import { LkSMSConfig } from 'src/config';
 
 @Injectable()
 export class NotifyService {
@@ -90,8 +91,14 @@ export class NotifyService {
             return true
         }
 
-        const lk = new LkSmsLibrary()
-        const res = await lk.setReceiver(notify.receiver).setMessageContent(notify.content).send()
+        const lk = new LkSms({
+            appId: LkSMSConfig.appId,
+            password: LkSMSConfig.password,
+            sign: LkSMSConfig.sign,
+            userId: LkSMSConfig.userId
+        })
+
+        const res = await lk.setReceiver(...notify.receiver).setMessageContent(notify.content).send()
         if (res) {
             this.notifyDone(notify, NotifyPipe.SMS)
         }
